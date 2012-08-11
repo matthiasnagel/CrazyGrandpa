@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class Texture;
+@class ParallaxLayer;
 
 extern int W;
 extern int H;
@@ -22,6 +23,19 @@ typedef enum {
 {
     States state;
     NSMutableDictionary *dictionary;
+    
+    Texture *playerTexture;
+    int playerX;
+    int playerY;
+    
+    //Parallax-Layer
+    ParallaxLayer *back;
+    ParallaxLayer *clouds;
+    
+    //Scroll-Translation
+    float xt;
+    float yt;
+
     //Current Frame
     int timer;
 }

@@ -9,6 +9,7 @@
 #import "GameManager.h"
 #import "Texture.h"
 #import <OpenGLES/ES1/gl.h>
+#import "ParallaxLayer.h"
 
 int W=480;
 int H=320;
@@ -20,6 +21,7 @@ int H=320;
 
 - (void)dealloc
 {
+    [playerTexture release];
     [dictionary release];
     [super dealloc];
 }
@@ -42,6 +44,18 @@ int H=320;
 
 - (void)preloader
 {
+    playerTexture = [self getTexture:@"player.png" isImage:YES];
+    int playerW = [playerTexture getWidth];
+    int playerH = [playerTexture getHeight];
+    
+    //Spieler zentrieren
+    playerX = W/2 - playerW/2;
+    playerY = H/2 - playerH/2;
+    
+    //Parallax-Layer
+    back = [[ParallaxLayer alloc] initWithImage: @"background.png"];
+    clouds = [[ParallaxLayer alloc] initWithImage: @"clouds.png"];
+    
     [self setOpenGlProjection];
     state = LOAD_GAME;
 }
@@ -107,12 +121,60 @@ int H=320;
 //    [self drawOpenGlLineFrom: CGPointMake(0, H/2) to: CGPointMake(W, H/2)];
     //[self drawOpenGlTriangle]; //OpenGL ES - Hello World
     //[self drawOpenGlLineFrom:CGPointMake(0, 0) to:CGPointMake(480, 320)];
-    [self drawOpenGlString: @"OpenGL ES rules!" at: CGPointMake(60, 100)];
-    [self translate];
-    [self rotate];
-    [self scale];
-    [self allTogether];
+//    [self drawOpenGlString: @"OpenGL ES rules!" at: CGPointMake(60, 100)];
+//    [self translate];
+//    [self rotate];
+//    [self scale];
+//    [self allTogether];
+//    static int frameNr = 0;
+//    static int frameW = 64;
+//    static int angle = 0;
+//    static int x = 0;
+//    static int y = 0;
+//    
+//    if (timer % 3 == 0) {
+//        frameNr ++;
+//        if (frameNr > 7) {
+//            frameNr = 0;
+//        }
+//    }
+//    
+//    angle++;
+//    x++;
+//    y++;
+//    
+//    [playerTexture drawFrame: frameNr
+//                frameWidth: frameW
+//                     angle: angle
+//                        at: CGPointMake(x, y)];
+    [self scrollWorld];
     
+    //Player nach oben bewegen
+    playerX += 0;
+    playerY -= 1;
+    
+    //Parallax-Ebenen rendern
+    [back drawWithFactor:2 realtiveTo:CGPointMake(playerX, playerY) atOrigin:[self getViewportOrigin]];
+    
+    [clouds drawWithFactor:1 realtiveTo:CGPointMake(playerX, playerY) atOrigin:[self getViewportOrigin]];
+    
+    //Player rendern
+    [playerTexture drawAt: CGPointMake(playerX, playerY)];
+}
+
+- (void)scrollWorld
+{
+    int playerW = [playerTexture getWidth];
+    int playerH = [playerTexture getHeight];
+    xt = W/2 - playerW/2 - playerX;
+    yt = H/2 - playerH/2 - playerY;
+    glLoadIdentity();
+    glTranslatef(xt, yt, 0);
+}
+
+- (CGPoint)getViewportOrigin
+{
+    return CGPointMake(-xt, -yt);
 }
 
 - (void)translate

@@ -21,6 +21,11 @@
 		FF06F8CF15D683F400426E40 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06F8CE15D683F400426E40 /* Sprite.m */; };
 		FF06F8D215D683FE00426E40 /* Texture.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06F8D115D683FE00426E40 /* Texture.m */; };
 		FF06F8D915D6924000426E40 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06F8D815D6923F00426E40 /* GameViewController.m */; };
+		FF2E940E15D6B1D800478486 /* testSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E940D15D6B1D800478486 /* testSprite.png */; };
+		FF2E941615D6B58800478486 /* ParallaxLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E941515D6B58800478486 /* ParallaxLayer.m */; };
+		FF2E941915D6B7CA00478486 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E941715D6B7CA00478486 /* background.png */; };
+		FF2E941A15D6B7CA00478486 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E941815D6B7CA00478486 /* clouds.png */; };
+		FF2E941C15D6B80900478486 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E941B15D6B80900478486 /* player.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +52,12 @@
 		FF06F8D115D683FE00426E40 /* Texture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture.m; sourceTree = "<group>"; };
 		FF06F8D715D6923F00426E40 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		FF06F8D815D6923F00426E40 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		FF2E940D15D6B1D800478486 /* testSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testSprite.png; sourceTree = "<group>"; };
+		FF2E941415D6B58800478486 /* ParallaxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxLayer.h; sourceTree = "<group>"; };
+		FF2E941515D6B58800478486 /* ParallaxLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxLayer.m; sourceTree = "<group>"; };
+		FF2E941715D6B7CA00478486 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		FF2E941815D6B7CA00478486 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
+		FF2E941B15D6B80900478486 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +79,10 @@
 		FF0172E015D6A5630083131B /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				FF2E941715D6B7CA00478486 /* background.png */,
+				FF2E941B15D6B80900478486 /* player.png */,
+				FF2E941815D6B7CA00478486 /* clouds.png */,
+				FF2E940D15D6B1D800478486 /* testSprite.png */,
 				FF0172E415D6A74B0083131B /* boy-sprite.png */,
 			);
 			name = Ressources;
@@ -116,6 +131,8 @@
 				FF06F8C115D6753A00426E40 /* GameManager.h */,
 				FF06F8C215D6753A00426E40 /* GameManager.m */,
 				FF06F8AE15D674F700426E40 /* Supporting Files */,
+				FF2E941415D6B58800478486 /* ParallaxLayer.h */,
+				FF2E941515D6B58800478486 /* ParallaxLayer.m */,
 			);
 			path = CrazyGrandpa;
 			sourceTree = "<group>";
@@ -195,6 +212,10 @@
 			files = (
 				FF06F8B215D674F700426E40 /* InfoPlist.strings in Resources */,
 				FF0172E515D6A74B0083131B /* boy-sprite.png in Resources */,
+				FF2E940E15D6B1D800478486 /* testSprite.png in Resources */,
+				FF2E941915D6B7CA00478486 /* background.png in Resources */,
+				FF2E941A15D6B7CA00478486 /* clouds.png in Resources */,
+				FF2E941C15D6B80900478486 /* player.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +233,7 @@
 				FF06F8CF15D683F400426E40 /* Sprite.m in Sources */,
 				FF06F8D215D683FE00426E40 /* Texture.m in Sources */,
 				FF06F8D915D6924000426E40 /* GameViewController.m in Sources */,
+				FF2E941615D6B58800478486 /* ParallaxLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +271,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -267,7 +289,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

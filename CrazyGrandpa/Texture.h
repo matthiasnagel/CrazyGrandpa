@@ -20,12 +20,13 @@
 - (void)createTextureFromString:(NSString*)text;
 
 //Texturerzeugung - Helper
-- (GLubyte *)generatePixelDataFromImage:(UIImage*)image;
-- (GLubyte *)generatePixelDataFromString: (NSString*)text;
+- (GLubyte*)generatePixelDataFromImage:(UIImage*)image;
+- (GLubyte*)generatePixelDataFromString: (NSString*)text;
 - (void)generateTexture:(GLubyte *)pixelData;
 
 //Textur rendern
 - (void)drawAt:(CGPoint)point;
+- (void)drawFrame:(int)frameNr frameWidth:(int)fw angle:(int)degrees at:(CGPoint)p;
 
 //Getter
 - (GLuint)getTextureID;

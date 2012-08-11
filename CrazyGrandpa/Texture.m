@@ -179,15 +179,52 @@
     glDisable(GL_TEXTURE_2D);
 }
 
-- (GLuint) getTextureID {
+- (void)drawFrame:(int)frameNr frameWidth:(int)fw angle:(int)degrees at:(CGPoint)p
+{    
+    //texture sprites    
+    GLshort imageVertices[ ] = {
+        0,   height, //links unten
+        fw,  height, //rechts unten
+        0,   0,      //links oben
+        fw,  0       //rechts oben
+    };
+    
+    GLfloat txW = 1.0/(width/fw);
+    GLfloat x1  = frameNr*txW;
+    GLfloat x2 =  x2  = x1 + txW; //oder: x2 = (frameNr+1)*txW;
+    GLfloat textureCoords[ ] = {
+        x1,  1, //links unten
+        x2,  1, //rechts unten
+        x1,  0, //links oben
+        x2,  0  //rechts oben
+    };
+    
+    glEnable(GL_TEXTURE_2D); //alle Flaechen werden nun texturiert
+    
+    glColor4f(1, 1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glVertexPointer(2, GL_SHORT, 0, imageVertices);
+    glTexCoordPointer(2, GL_FLOAT, 0, textureCoords);
+    
+    glPushMatrix();
+    glTranslatef(p.x+fw/2, p.y+height/2, 0);
+    glRotatef(degrees, 0, 0, 1); //angle = 0 = keine Rotation
+    glTranslatef(0-fw/2, 0-height/2, 0);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glPopMatrix();
+    
+    glDisable(GL_TEXTURE_2D);
+}
+
+- (GLuint)getTextureID {
     return textureID;
 }
 
-- (int) getWidth {
+- (int)getWidth {
     return width;
 }
 
-- (int) getHeight {
+- (int)getHeight {
     return height;
 }
 
