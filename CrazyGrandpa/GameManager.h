@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class Texture;
+
 extern int W;
 extern int H;
 
@@ -35,15 +37,25 @@ typedef enum {
 - (void)touchEnded;
 - (void)drawStatesWithFrame: (CGRect) frame;
 - (void)playGame;
+- (void) translate;
+- (void) rotate;
+- (void) scale;
+- (void) allTogether;
 
 //Helper Methods
 - (void)setState: (int) stt;
 - (int)getRndBetween: (int) bottom and: (int) top;
+- (NSMutableDictionary*) getDictionary;
+- (void) removeFromDictionary: (NSString*) name;
 
 //OpenGL
 - (void)setOpenGlProjection;
 - (void)drawOpenGlTriangle;
 - (void)drawOpenGlLineFrom:(CGPoint)p1 to:(CGPoint)p2;
 - (void)drawOpenGlRect:(CGRect)rect;
+- (void)drawOpenGlImg: (NSString*) picName at: (CGPoint) p;
+- (CGSize)getOpenGlImgDimension: (NSString*) picName;
+- (void)drawOpenGlString:(NSString*)text at:(CGPoint) p;
+- (Texture*)getTexture:(NSString*)name isImage:(bool)imgFlag;
 
 @end

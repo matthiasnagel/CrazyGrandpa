@@ -84,18 +84,18 @@ int H=320;
 {
     timer++;
     
-    CGSize textureSize = [self getOpenGlImgDimension: @"boy-sprite.png"];
-    int w = textureSize.width;
-    int h = textureSize.height;
-    
-    static int yStep = 0;
-    yStep -= 1;
-    
-    for (int x = 0; x < W; x += w) {
-        for (int y = 0; y < H; y += h) {
-            [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(x, y + yStep)];
-        }
-    }
+//    CGSize textureSize = [self getOpenGlImgDimension: @"boy-sprite.png"];
+//    int w = textureSize.width;
+//    int h = textureSize.height;
+//    
+//    static int yStep = 0;
+//    yStep -= 1;
+//    
+//    for (int x = 0; x < W; x += w) {
+//        for (int y = 0; y < H; y += h) {
+//            [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(x, y + yStep)];
+//        }
+//    }
     
 //    for (int i = 0; i < 99999; i++)
 //    {
@@ -108,7 +108,75 @@ int H=320;
     //[self drawOpenGlTriangle]; //OpenGL ES - Hello World
     //[self drawOpenGlLineFrom:CGPointMake(0, 0) to:CGPointMake(480, 320)];
     [self drawOpenGlString: @"OpenGL ES rules!" at: CGPointMake(60, 100)];
+    [self translate];
+    [self rotate];
+    [self scale];
+    [self allTogether];
     
+}
+
+- (void)translate
+{
+    static int x = 160-32;
+    static int y = 320-32;
+    
+    y -= 1;
+    
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
+    glPopMatrix();
+}
+
+- (void)rotate
+{
+    static int a = 0;
+    a -= 10;
+    
+    glPushMatrix();
+    glTranslatef(160, 240, 0); //Mittig platzieren
+    glRotatef(a, 0, 0, 1);
+    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
+    glPopMatrix();
+}
+
+- (void) scale {
+    static float s = 1;
+    static int sf = 1; //Vorzeichen
+    
+    s -= 0.01 * sf;
+    if (s < 0 || s > 1) {
+        sf *= -1;
+    }
+    
+    glPushMatrix();
+    glTranslatef(160, 240, 0);
+    glScalef(s, s, 1);
+    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
+    glPopMatrix();
+}
+
+- (void) allTogether {
+    static int x = 160;
+    static int y = 320;
+    static int a = 0;
+    static float s = 1;
+    static int sf = 1; //Vorzeichen
+    
+    y -= 1;
+    a -= 10;
+    
+    s -= 0.01 * sf;
+    if (s < 0 || s > 1) {
+        sf *= -1;
+    }
+    
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+    glRotatef(a, 0, 0, 1);
+    glScalef(s, s, 1);
+    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
+    glPopMatrix();
 }
 
 #pragma mark - OpenGL Methods
@@ -173,14 +241,16 @@ int H=320;
     glPopMatrix();
 }
 
-- (void) drawOpenGlImg: (NSString*) picName at: (CGPoint) p {
+- (void)drawOpenGlImg:(NSString*) picName at:(CGPoint) p
+{
     Texture *texture = [self getTexture: picName isImage: YES];
     if (texture) {
         [texture drawAt: p];
     }
 }
 
-- (CGSize) getOpenGlImgDimension: (NSString*) picName {
+- (CGSize)getOpenGlImgDimension:(NSString*)picName
+{
     Texture *texture = [self getTexture: picName isImage: YES];
     if (texture) {
         return CGSizeMake([texture getWidth], [texture getHeight]);
