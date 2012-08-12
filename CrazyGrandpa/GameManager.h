@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Sprite.h"
 
-@class Texture;
+@class Player;
 @class ParallaxLayer;
+@class Texture;
 
 extern int W;
 extern int H;
@@ -24,12 +26,13 @@ typedef enum {
 @interface GameManager : NSObject
 {
     States state;
+    Player *player;
+    
+    NSMutableArray *sprites; //Aktive Sprites, die gerendert werden sollen
+    NSMutableArray *newSprites; //Neue Sprites, die der sprites-Liste hinzugefügt werden sollen
+    NSMutableArray *destroyableSprites; //Inaktive Sprites, die gelöscht werden sollen
     NSMutableDictionary *dictionary;
-    
-    Texture *playerTexture;
-    int playerX;
-    int playerY;
-    
+        
     //Parallax-Layer
     ParallaxLayer *back;
     ParallaxLayer *clouds;
@@ -46,6 +49,8 @@ typedef enum {
 + (GameManager *)getInstance;
 - (void)preloader;
 - (void)loadGame;
+- (id)createSprite: (SpriteType)type speed:(CGPoint)sxy pos:(CGPoint)pxy;
+- (void)createExplosionFor: (Sprite*)sprite;
 
 //Game Handler
 - (void)touchBegan:(CGPoint) p;
@@ -53,20 +58,23 @@ typedef enum {
 - (void)touchEnded;
 - (void)drawStatesWithFrame: (CGRect) frame;
 - (void)playGame;
-- (void) translate;
-- (void) rotate;
-- (void) scale;
-- (void) allTogether;
+- (void)scrollWorld;
+- (CGPoint)getViewportOrigin;
+- (void)generateNewObjects;
+- (void)generateObject:(SpriteType)type speedx:(int)sx speedy:(int)sy;
+- (CGPoint)getRandomStartPosition;
+- (void)checkSprite:(Sprite*)sprite;
 
 //Helper Methods
 - (void)setState: (int) stt;
-- (int)getRndBetween: (int) bottom and: (int) top;
+- (void)manageSprites;
+- (void)renderSprites;
+- (int)getRndBetween:(int)bottom and:(int)top;
 - (NSMutableDictionary*) getDictionary;
 - (void) removeFromDictionary: (NSString*) name;
 
 //OpenGL
 - (void)setOpenGlProjection;
-- (void)drawOpenGlTriangle;
 - (void)drawOpenGlLineFrom:(CGPoint)p1 to:(CGPoint)p2;
 - (void)drawOpenGlRect:(CGRect)rect;
 - (void)drawOpenGlImg: (NSString*) picName at: (CGPoint) p;

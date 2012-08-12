@@ -23,11 +23,26 @@
 		FF06F8CF15D683F400426E40 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06F8CE15D683F400426E40 /* Sprite.m */; };
 		FF06F8D215D683FE00426E40 /* Texture.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06F8D115D683FE00426E40 /* Texture.m */; };
 		FF06F8D915D6924000426E40 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF06F8D815D6923F00426E40 /* GameViewController.m */; };
-		FF2E940E15D6B1D800478486 /* testSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E940D15D6B1D800478486 /* testSprite.png */; };
 		FF2E941615D6B58800478486 /* ParallaxLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E941515D6B58800478486 /* ParallaxLayer.m */; };
-		FF2E941915D6B7CA00478486 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E941715D6B7CA00478486 /* background.png */; };
-		FF2E941A15D6B7CA00478486 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E941815D6B7CA00478486 /* clouds.png */; };
-		FF2E941C15D6B80900478486 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2E941B15D6B80900478486 /* player.png */; };
+		FF5A0BFB15D7F08500F7CD60 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0BFA15D7F08500F7CD60 /* Player.m */; };
+		FF5A0BFF15D7F09300F7CD60 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0BFE15D7F09300F7CD60 /* Item.m */; };
+		FF5A0C0215D7F0A800F7CD60 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C0115D7F0A800F7CD60 /* Animation.m */; };
+		FF5A0C0515D7F0BB00F7CD60 /* Gear.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C0415D7F0BB00F7CD60 /* Gear.m */; };
+		FF5A0C0815D7F0CF00F7CD60 /* Terrain.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C0715D7F0CF00F7CD60 /* Terrain.m */; };
+		FF5A0C0B15D7F23A00F7CD60 /* Cloud.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C0A15D7F23A00F7CD60 /* Cloud.m */; };
+		FF5A0C1615D7F47900F7CD60 /* fighter.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C0D15D7F47900F7CD60 /* fighter.png */; };
+		FF5A0C1715D7F47900F7CD60 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C0E15D7F47900F7CD60 /* gear.png */; };
+		FF5A0C1815D7F47900F7CD60 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C0F15D7F47900F7CD60 /* background.png */; };
+		FF5A0C1915D7F47900F7CD60 /* bullets.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C1015D7F47900F7CD60 /* bullets.png */; };
+		FF5A0C1A15D7F47900F7CD60 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C1115D7F47900F7CD60 /* clouds.png */; };
+		FF5A0C1B15D7F47900F7CD60 /* explosion_8f.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C1215D7F47900F7CD60 /* explosion_8f.png */; };
+		FF5A0C1C15D7F47900F7CD60 /* octo_8f.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C1315D7F47900F7CD60 /* octo_8f.png */; };
+		FF5A0C1D15D7F47900F7CD60 /* mine.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C1415D7F47900F7CD60 /* mine.png */; };
+		FF5A0C1E15D7F47900F7CD60 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A0C1515D7F47900F7CD60 /* player.png */; };
+		FF5A0C2115D7FB7900F7CD60 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2015D7FB7900F7CD60 /* Bullet.m */; };
+		FF5A0C2415D7FBB000F7CD60 /* Octo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2315D7FBB000F7CD60 /* Octo.m */; };
+		FF5A0C2715D7FBBA00F7CD60 /* Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2615D7FBB900F7CD60 /* Mine.m */; };
+		FF5A0C2A15D7FBC300F7CD60 /* Fighter.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2915D7FBC300F7CD60 /* Fighter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,12 +71,37 @@
 		FF06F8D115D683FE00426E40 /* Texture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture.m; sourceTree = "<group>"; };
 		FF06F8D715D6923F00426E40 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		FF06F8D815D6923F00426E40 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		FF2E940D15D6B1D800478486 /* testSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testSprite.png; sourceTree = "<group>"; };
 		FF2E941415D6B58800478486 /* ParallaxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxLayer.h; sourceTree = "<group>"; };
 		FF2E941515D6B58800478486 /* ParallaxLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxLayer.m; sourceTree = "<group>"; };
-		FF2E941715D6B7CA00478486 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		FF2E941815D6B7CA00478486 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
-		FF2E941B15D6B80900478486 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
+		FF5A0BF915D7F08500F7CD60 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		FF5A0BFA15D7F08500F7CD60 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		FF5A0BFD15D7F09300F7CD60 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		FF5A0BFE15D7F09300F7CD60 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		FF5A0C0015D7F0A800F7CD60 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		FF5A0C0115D7F0A800F7CD60 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
+		FF5A0C0315D7F0BB00F7CD60 /* Gear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gear.h; sourceTree = "<group>"; };
+		FF5A0C0415D7F0BB00F7CD60 /* Gear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gear.m; sourceTree = "<group>"; };
+		FF5A0C0615D7F0CF00F7CD60 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
+		FF5A0C0715D7F0CF00F7CD60 /* Terrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Terrain.m; sourceTree = "<group>"; };
+		FF5A0C0915D7F23A00F7CD60 /* Cloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloud.h; sourceTree = "<group>"; };
+		FF5A0C0A15D7F23A00F7CD60 /* Cloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cloud.m; sourceTree = "<group>"; };
+		FF5A0C0D15D7F47900F7CD60 /* fighter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fighter.png; sourceTree = "<group>"; };
+		FF5A0C0E15D7F47900F7CD60 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		FF5A0C0F15D7F47900F7CD60 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		FF5A0C1015D7F47900F7CD60 /* bullets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullets.png; sourceTree = "<group>"; };
+		FF5A0C1115D7F47900F7CD60 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
+		FF5A0C1215D7F47900F7CD60 /* explosion_8f.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_8f.png; sourceTree = "<group>"; };
+		FF5A0C1315D7F47900F7CD60 /* octo_8f.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = octo_8f.png; sourceTree = "<group>"; };
+		FF5A0C1415D7F47900F7CD60 /* mine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mine.png; sourceTree = "<group>"; };
+		FF5A0C1515D7F47900F7CD60 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
+		FF5A0C1F15D7FB7900F7CD60 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		FF5A0C2015D7FB7900F7CD60 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
+		FF5A0C2215D7FBB000F7CD60 /* Octo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Octo.h; sourceTree = "<group>"; };
+		FF5A0C2315D7FBB000F7CD60 /* Octo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Octo.m; sourceTree = "<group>"; };
+		FF5A0C2515D7FBB900F7CD60 /* Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine.h; sourceTree = "<group>"; };
+		FF5A0C2615D7FBB900F7CD60 /* Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine.m; sourceTree = "<group>"; };
+		FF5A0C2815D7FBC300F7CD60 /* Fighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fighter.h; sourceTree = "<group>"; };
+		FF5A0C2915D7FBC300F7CD60 /* Fighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fighter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +123,9 @@
 		FF0172E015D6A5630083131B /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				FF5A0C0C15D7F3FB00F7CD60 /* test */,
 				FF04ACBD15D6CE28004B0987 /* testbg.png */,
 				FF04ACBE15D6CE28004B0987 /* testbg@2x.png */,
-				FF2E941715D6B7CA00478486 /* background.png */,
-				FF2E941B15D6B80900478486 /* player.png */,
-				FF2E941815D6B7CA00478486 /* clouds.png */,
-				FF2E940D15D6B1D800478486 /* testSprite.png */,
 				FF0172E415D6A74B0083131B /* boy-sprite.png */,
 			);
 			name = Ressources;
@@ -161,8 +198,44 @@
 				FF06F8CE15D683F400426E40 /* Sprite.m */,
 				FF06F8D015D683FE00426E40 /* Texture.h */,
 				FF06F8D115D683FE00426E40 /* Texture.m */,
+				FF5A0BF915D7F08500F7CD60 /* Player.h */,
+				FF5A0BFA15D7F08500F7CD60 /* Player.m */,
+				FF5A0BFD15D7F09300F7CD60 /* Item.h */,
+				FF5A0BFE15D7F09300F7CD60 /* Item.m */,
+				FF5A0C0015D7F0A800F7CD60 /* Animation.h */,
+				FF5A0C0115D7F0A800F7CD60 /* Animation.m */,
+				FF5A0C0315D7F0BB00F7CD60 /* Gear.h */,
+				FF5A0C0415D7F0BB00F7CD60 /* Gear.m */,
+				FF5A0C0615D7F0CF00F7CD60 /* Terrain.h */,
+				FF5A0C0715D7F0CF00F7CD60 /* Terrain.m */,
+				FF5A0C0915D7F23A00F7CD60 /* Cloud.h */,
+				FF5A0C0A15D7F23A00F7CD60 /* Cloud.m */,
+				FF5A0C1F15D7FB7900F7CD60 /* Bullet.h */,
+				FF5A0C2015D7FB7900F7CD60 /* Bullet.m */,
+				FF5A0C2215D7FBB000F7CD60 /* Octo.h */,
+				FF5A0C2315D7FBB000F7CD60 /* Octo.m */,
+				FF5A0C2515D7FBB900F7CD60 /* Mine.h */,
+				FF5A0C2615D7FBB900F7CD60 /* Mine.m */,
+				FF5A0C2815D7FBC300F7CD60 /* Fighter.h */,
+				FF5A0C2915D7FBC300F7CD60 /* Fighter.m */,
 			);
 			name = Shapes;
+			sourceTree = "<group>";
+		};
+		FF5A0C0C15D7F3FB00F7CD60 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A0C0D15D7F47900F7CD60 /* fighter.png */,
+				FF5A0C0E15D7F47900F7CD60 /* gear.png */,
+				FF5A0C0F15D7F47900F7CD60 /* background.png */,
+				FF5A0C1015D7F47900F7CD60 /* bullets.png */,
+				FF5A0C1115D7F47900F7CD60 /* clouds.png */,
+				FF5A0C1215D7F47900F7CD60 /* explosion_8f.png */,
+				FF5A0C1315D7F47900F7CD60 /* octo_8f.png */,
+				FF5A0C1415D7F47900F7CD60 /* mine.png */,
+				FF5A0C1515D7F47900F7CD60 /* player.png */,
+			);
+			name = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,12 +291,17 @@
 			files = (
 				FF06F8B215D674F700426E40 /* InfoPlist.strings in Resources */,
 				FF0172E515D6A74B0083131B /* boy-sprite.png in Resources */,
-				FF2E940E15D6B1D800478486 /* testSprite.png in Resources */,
-				FF2E941915D6B7CA00478486 /* background.png in Resources */,
-				FF2E941A15D6B7CA00478486 /* clouds.png in Resources */,
-				FF2E941C15D6B80900478486 /* player.png in Resources */,
 				FF04ACBF15D6CE28004B0987 /* testbg.png in Resources */,
 				FF04ACC015D6CE28004B0987 /* testbg@2x.png in Resources */,
+				FF5A0C1615D7F47900F7CD60 /* fighter.png in Resources */,
+				FF5A0C1715D7F47900F7CD60 /* gear.png in Resources */,
+				FF5A0C1815D7F47900F7CD60 /* background.png in Resources */,
+				FF5A0C1915D7F47900F7CD60 /* bullets.png in Resources */,
+				FF5A0C1A15D7F47900F7CD60 /* clouds.png in Resources */,
+				FF5A0C1B15D7F47900F7CD60 /* explosion_8f.png in Resources */,
+				FF5A0C1C15D7F47900F7CD60 /* octo_8f.png in Resources */,
+				FF5A0C1D15D7F47900F7CD60 /* mine.png in Resources */,
+				FF5A0C1E15D7F47900F7CD60 /* player.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +320,16 @@
 				FF06F8D215D683FE00426E40 /* Texture.m in Sources */,
 				FF06F8D915D6924000426E40 /* GameViewController.m in Sources */,
 				FF2E941615D6B58800478486 /* ParallaxLayer.m in Sources */,
+				FF5A0BFB15D7F08500F7CD60 /* Player.m in Sources */,
+				FF5A0BFF15D7F09300F7CD60 /* Item.m in Sources */,
+				FF5A0C0215D7F0A800F7CD60 /* Animation.m in Sources */,
+				FF5A0C0515D7F0BB00F7CD60 /* Gear.m in Sources */,
+				FF5A0C0815D7F0CF00F7CD60 /* Terrain.m in Sources */,
+				FF5A0C0B15D7F23A00F7CD60 /* Cloud.m in Sources */,
+				FF5A0C2115D7FB7900F7CD60 /* Bullet.m in Sources */,
+				FF5A0C2415D7FBB000F7CD60 /* Octo.m in Sources */,
+				FF5A0C2715D7FBBA00F7CD60 /* Mine.m in Sources */,
+				FF5A0C2A15D7FBC300F7CD60 /* Fighter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

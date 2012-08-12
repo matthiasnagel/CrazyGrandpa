@@ -10,6 +10,13 @@
 #import "Texture.h"
 #import <OpenGLES/ES1/gl.h>
 #import "ParallaxLayer.h"
+#import "Bullet.h"
+#import "Octo.h"
+#import "Gear.h"
+#import "Player.h"
+#import "Animation.h"
+#import "Mine.h"
+#import "Fighter.h"
 
 int W=480;
 int H=320;
@@ -21,7 +28,9 @@ int H=320;
 
 - (void)dealloc
 {
-    [playerTexture release];
+    [sprites release];
+    [newSprites release];
+    [destroyableSprites release];
     [dictionary release];
     [super dealloc];
 }
@@ -44,14 +53,19 @@ int H=320;
 
 - (void)preloader
 {
-    playerTexture = [self getTexture:@"boy-sprite.png" isImage:YES];
-    int playerW = [playerTexture getWidth];
-    int playerH = [playerTexture getHeight];
-    
-    //Spieler zentrieren
-    playerX = W/2 - playerW/2;
-    playerY = H/2 - playerH/2;
-    
+    sprites = [[NSMutableArray alloc] initWithCapacity:20];
+    newSprites = [[NSMutableArray alloc] initWithCapacity:20];
+    destroyableSprites = [[NSMutableArray alloc] initWithCapacity:20];
+
+    //Preload OGL-Textures
+    [self getTexture: @"fighter.png" isImage: YES];
+    [self getTexture: @"octo_8f.png" isImage: YES];
+    [self getTexture: @"explosion_8f.png" isImage: YES];
+    [self getTexture: @"player.png" isImage: YES];
+    [self getTexture: @"mine.png" isImage: YES];
+    [self getTexture: @"bullets.png" isImage: YES];
+    [self getTexture: @"gear.png" isImage: YES];
+        
     //Parallax-Layer
     back = [[ParallaxLayer alloc] initWithImage: @"testbg.png"];
     clouds = [[ParallaxLayer alloc] initWithImage: @"clouds.png"];
@@ -62,34 +76,155 @@ int H=320;
 
 - (void)loadGame
 {
+    [sprites removeAllObjects];
+    [newSprites removeAllObjects];
+    [destroyableSprites removeAllObjects];
+    
+    [self createSprite: PLAYER
+                 speed: CGPointMake(0, 0)
+                   pos: CGPointMake(0, 0)];
+}
+
+- (id) createSprite: (SpriteType) type
+              speed: (CGPoint) sxy
+                pos: (CGPoint) pxy {
+    if (type == PLAYER) {
+        player = [[Player alloc] initWithImage: @"player.png"
+                                    frameCnt: 1
+                                   frameStep: 0
+                                       speed: sxy
+                                         pos: pxy];
+        [player setType: PLAYER];
+        [newSprites addObject: player];
+        [player release];
+        return player;
+    } else if (type == BULLET) {
+        Bullet *bullet = [[Bullet alloc] initWithImage: @"bullets.png"
+                                            frameCnt: 1
+                                           frameStep: 0
+                                               speed: sxy
+                                                 pos: pxy];
+        [bullet setType: BULLET];
+        [newSprites addObject: bullet];
+        [bullet release];
+        return bullet;
+    } else if (type == GEAR) {
+        Gear *gear = [[Gear alloc] initWithImage: @"gear.png"
+                                      frameCnt: 1
+                                     frameStep: 0
+                                         speed: sxy
+                                           pos: pxy];
+        [gear setType: GEAR];
+        [newSprites addObject: gear];
+        [gear release];
+        return gear;
+    } else if (type == OCTO) {
+        Octo *octo = [[Octo alloc] initWithImage: @"octo_8f.png"
+                                      frameCnt: 8
+                                     frameStep: 3
+                                         speed: sxy
+                                           pos: pxy];
+        [octo setType: OCTO];
+        [newSprites addObject: octo];
+        [octo release];
+        return octo;
+    } else if (type == MINE) {
+        Mine *mine = [[Mine alloc] initWithImage: @"mine.png"
+                                      frameCnt: 1
+                                     frameStep: 0
+                                         speed: sxy
+                                           pos: pxy];
+        [mine setType: MINE];
+        [newSprites addObject: mine];
+        [mine release];
+        return mine;
+    } else if (type == FIGHTER) {
+        Fighter *fighter = [[Fighter alloc] initWithImage: @"fighter.png"
+                                               frameCnt: 1
+                                              frameStep: 0
+                                                  speed: sxy
+                                                    pos: pxy];
+        [fighter setType: FIGHTER];
+        [newSprites addObject: fighter];
+        [fighter release];
+        return fighter;
+    } else if (type == ANIMATION) {
+        Animation *ani = [[Animation alloc] initWithImage: @"explosion_8f.png"
+                                               frameCnt: 8
+                                              frameStep: 3
+                                                  speed: sxy
+                                                    pos: pxy];
+        [ani setType: ANIMATION];
+        [newSprites addObject: ani];
+        [ani release];
+        return ani;
+    } else {
+        NSLog(@"ERROR: Unbekannter Sprite-Typ: %i", type);
+        return nil;
+    }
+}
+
+- (void) createExplosionFor: (Sprite *) sprite {
+    CGPoint p = [Animation getOriginBasedOnCenterOf: [sprite getRect]
+                                             andPic: @"explosion_8f.png"
+                                       withFrameCnt: 8];
+    [self createSprite: ANIMATION
+                 speed: CGPointMake(0, 0)
+                   pos: p];
 }
 
 #pragma mark - Game Handling Methods
 
-- (void)touchBegan: (CGPoint) p {
-    NSLog(@"Touch: %f %f", p.x, p.y);
+- (void) touchBegan: (CGPoint) p {
+    [self handleStates];
+    if (state == PLAY_GAME && player) {
+        [player setTouch: p];
+    }
 }
 
-- (void)touchMoved: (CGPoint) p {
-    [self touchBegan: p];
+- (void) touchMoved: (CGPoint) p {
+    if (state == PLAY_GAME) {
+        [self touchBegan: p];
+    }
 }
 
-- (void)touchEnded {
+- (void) touchEnded {
+    if (state == PLAY_GAME && player) {
+        [player touchEnded];
+    }
+}
+
+- (void) handleStates {
+    if (state == START_GAME) {
+        state = PLAY_GAME;
+    }
+    else if (state == GAME_OVER) {
+        state = LOAD_GAME;
+    }
 }
 
 - (void)drawStatesWithFrame:(CGRect)frame
 {
     W = frame.size.width;
     H = frame.size.height;
-    
-    
+    CGPoint o = [self getViewportOrigin];
     switch (state) {
         case LOAD_GAME:
             [self loadGame];
-            state = PLAY_GAME;
+            state = START_GAME;
+            break;
+        case START_GAME:
+            [self drawOpenGlString: @"Tap screen to start!" at: CGPointMake(o.x, o.y)];
+            [self drawOpenGlString: @"How to control the ship:" at: CGPointMake(o.x, o.y + 50)];
+            [self drawOpenGlString: @"Tap left - turn left." at: CGPointMake(o.x, o.y + 75)];
+            [self drawOpenGlString: @"Tap right - turn right." at: CGPointMake(o.x, o.y + 100)];
             break;
         case PLAY_GAME:
             [self playGame];
+            break;
+        case GAME_OVER:
+            [self playGame];
+            [self drawOpenGlString: @"G A M E  O V E R" at: CGPointMake(o.x, o.y)];
             break;
         default: NSLog(@"ERROR: Unbekannter Spielzustand: %i", state);
             break;
@@ -99,77 +234,23 @@ int H=320;
 - (void)playGame
 {
     timer++;
-    
-//    CGSize textureSize = [self getOpenGlImgDimension: @"boy-sprite.png"];
-//    int w = textureSize.width;
-//    int h = textureSize.height;
-//    
-//    static int yStep = 0;
-//    yStep -= 1;
-//    
-//    for (int x = 0; x < W; x += w) {
-//        for (int y = 0; y < H; y += h) {
-//            [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(x, y + yStep)];
-//        }
-//    }
-    
-//    for (int i = 0; i < 99999; i++)
-//    {
-//        int x = [self getRndBetween: 0 and: W];
-//        int y = [self getRndBetween: 0 and: H];
-//        [self drawOpenGlRect:CGRectMake(x, y, 1, 1)];
-//    }
-//    
-//    [self drawOpenGlLineFrom: CGPointMake(0, H/2) to: CGPointMake(W, H/2)];
-    //[self drawOpenGlTriangle]; //OpenGL ES - Hello World
-    //[self drawOpenGlLineFrom:CGPointMake(0, 0) to:CGPointMake(480, 320)];
-//    [self drawOpenGlString: @"OpenGL ES rules!" at: CGPointMake(60, 100)];
-//    [self translate];
-//    [self rotate];
-//    [self scale];
-//    [self allTogether];
-//    static int frameNr = 0;
-//    static int frameW = 64;
-//    static int angle = 0;
-//    static int x = 0;
-//    static int y = 0;
-//    
-//    if (timer % 3 == 0) {
-//        frameNr ++;
-//        if (frameNr > 7) {
-//            frameNr = 0;
-//        }
-//    }
-//    
-//    angle++;
-//    x++;
-//    y++;
-//    
-//    [playerTexture drawFrame: frameNr
-//                frameWidth: frameW
-//                     angle: angle
-//                        at: CGPointMake(x, y)];
     [self scrollWorld];
     
-    //Player nach oben bewegen
-    playerX += 1;
-    playerY -= 0;
+    //Parallax-Ebenen
+    [back drawWithFactor:2 realtiveTo:[player getPos] atOrigin:[self getViewportOrigin]];
+    [clouds drawWithFactor:1 realtiveTo:[player getPos] atOrigin:[self getViewportOrigin]];
     
-    //Parallax-Ebenen rendern
-    [back drawWithFactor:2 realtiveTo:CGPointMake(playerX, playerY) atOrigin:[self getViewportOrigin]];
-    
-    [clouds drawWithFactor:1 realtiveTo:CGPointMake(playerX, playerY) atOrigin:[self getViewportOrigin]];
-    
-    //Player rendern
-    [playerTexture drawAt: CGPointMake(playerX, playerY)];
+    [self generateNewObjects];
+    [self manageSprites];
+    [self renderSprites];
 }
 
 - (void)scrollWorld
 {
-    int playerW = [playerTexture getWidth];
-    int playerH = [playerTexture getHeight];
-    xt = W/2 - playerW/2 - playerX;
-    yt = H/2 - playerH/2 - playerY;
+    CGPoint p = [player getPos];
+    CGRect r = [player getRect];
+    xt = W/2 - r.size.width/2 - p.x;
+    yt = H/2 - r.size.height/2 - p.y;
     glLoadIdentity();
     glTranslatef(xt, yt, 0);
 }
@@ -179,68 +260,103 @@ int H=320;
     return CGPointMake(-xt, -yt);
 }
 
-- (void)translate
+- (void)generateNewObjects
 {
-    static int x = 160-32;
-    static int y = 320-32;
-    
-    y -= 1;
-    
-    glPushMatrix();
-    glTranslatef(x, y, 0);
-    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
-    glPopMatrix();
-}
-
-- (void)rotate
-{
-    static int a = 0;
-    a -= 10;
-    
-    glPushMatrix();
-    glTranslatef(160, 240, 0); //Mittig platzieren
-    glRotatef(a, 0, 0, 1);
-    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
-    glPopMatrix();
-}
-
-- (void) scale {
-    static float s = 1;
-    static int sf = 1; //Vorzeichen
-    
-    s -= 0.01 * sf;
-    if (s < 0 || s > 1) {
-        sf *= -1;
+    //Octos
+    if (timer % 12 == 0) {
+        int sx = [self getRndBetween: -3 and: 3];
+        int sy = [self getRndBetween: -7 and: -1];
+        [self generateObject: OCTO speedX: sx speedY: sy];
     }
     
-    glPushMatrix();
-    glTranslatef(160, 240, 0);
-    glScalef(s, s, 1);
-    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
-    glPopMatrix();
-}
-
-- (void) allTogether {
-    static int x = 160;
-    static int y = 320;
-    static int a = 0;
-    static float s = 1;
-    static int sf = 1; //Vorzeichen
-    
-    y -= 1;
-    a -= 10;
-    
-    s -= 0.01 * sf;
-    if (s < 0 || s > 1) {
-        sf *= -1;
+    //Mines
+    if (timer % 5 == 0) {
+        [self generateObject: MINE speedX: 0 speedY: 0];
     }
     
-    glPushMatrix();
-    glTranslatef(x, y, 0);
-    glRotatef(a, 0, 0, 1);
-    glScalef(s, s, 1);
-    [self drawOpenGlImg: @"boy-sprite.png" at: CGPointMake(0, 0)]; //Animation erfolgt ueber die Matrix
-    glPopMatrix();
+    //Fighter
+    if (timer % 18 == 0) {
+        [self generateObject: FIGHTER speedX: 7 speedY: 7];
+    }
+    
+    //Fighter im Galaga-Style erzeugen
+    static int fighterCnt = 15; //Anzahl Fighter pro Reihe
+    static CGPoint startP;
+    if (fighterCnt == 15 && timer % 20 == 0) { //Neue Reihe erzeugen?
+        fighterCnt = 0;
+        startP = [self getRandomStartPosition];
+    }
+    if (timer % 9 == 0 && fighterCnt < 15) { //timer bestimmt die Abstaende
+        fighterCnt++;
+        [self createSprite: FIGHTER
+                     speed: CGPointMake(7, 7)
+                       pos: startP];
+    }
+}
+
+- (void)generateObject:(SpriteType)type speedX:(int)sx speedY:(int)sy
+{
+    CGPoint startPos = [self getRandomStartPosition];
+    
+    [self createSprite: type
+                 speed: CGPointMake(sx, sy)
+                   pos: startPos];
+}
+
+- (CGPoint)getRandomStartPosition
+{
+    int px = -W, py = -H; //Positionierung ausserhab des Screens
+    int f = 128; //Pufferzone (frameW bzw. frameH)
+    int flag = [self getRndBetween: 0 and: 3];
+    
+    switch (flag) {
+        case 0: //Top
+            px    = [self getRndBetween: -f-W and: f+W*2];
+            py    = [self getRndBetween: -f-H and: -f];
+            break;
+        case 1: //Left
+            px    = [self getRndBetween: -f-W and: -f];
+            py    = [self getRndBetween: -f-H and: f+H*2];
+            break;
+        case 2: //Right
+            px    = [self getRndBetween: f+W and: f+W*2];
+            py    = [self getRndBetween: -f-H and: f+H*2];
+            break;
+        case 3: //Bottom
+            px    = [self getRndBetween: -f-W and: f+W*2];
+            py    = [self getRndBetween: f+H and: f+H*2];
+            break;
+    }
+    
+    CGPoint o = [self getViewportOrigin];
+    return CGPointMake(o.x + px, o.y + py);
+}
+
+- (void) checkSprite:(Sprite *)sprite
+{
+    if ([sprite getType] == PLAYER || [sprite getType] == BULLET) {
+        for (Sprite *sprite2test in sprites) {
+            if ([sprite2test getType] == OCTO
+                || [sprite2test getType] == FIGHTER) {
+                if ([sprite checkColWithSprite: sprite2test] && state != GAME_OVER) {
+                    [sprite hit];
+                    [sprite2test hit];
+                }
+            }
+            if ([sprite getType] == BULLET && [sprite2test getType] == MINE) {
+                if ([sprite checkColWithSprite: sprite2test]) {
+                    //Mines sind unzerstörbar
+                    [sprite hit];
+                    [[GameManager getInstance] createExplosionFor: sprite];
+                }
+            }
+            if ([sprite getType] == PLAYER && [sprite2test getType] == MINE) {
+                if ([sprite checkColWithSprite: sprite2test]) {
+                    [sprite hit];
+                }
+            }
+        }
+    }
 }
 
 #pragma mark - OpenGL Methods
@@ -260,19 +376,6 @@ int H=320;
     glMatrixMode(GL_MODELVIEW);
     glEnableClientState(GL_VERTEX_ARRAY);
     glDisable(GL_DEPTH_TEST); //2D only
-}
-
-- (void)drawOpenGlTriangle
-{
-    GLshort vertices[ ] = {
-        0,   250, //links unten (y-Achse zeigt nach unten)
-        250, 250, //rechts unten
-        0,   0,   //links oben
-    };
-    
-    glColor4f(0, 0, 0, 1);
-    glVertexPointer(2, GL_SHORT, 0, vertices); //"2" = Anzahl Elemente pro Eckpunkt, entweder 2, 3, oder 4!
-    glDrawArrays(GL_TRIANGLES, 0, 3); //"3" = Anzahl der Eckpunkte
 }
 
 - (void)drawOpenGlLineFrom:(CGPoint)p1 to:(CGPoint)p2
@@ -356,6 +459,47 @@ int H=320;
 {
     state = stt;
 }
+
+- (void)manageSprites
+{
+    //NSLog(@"Sprites: %i destroyable: %i new: %i", [sprites count], [destroyableSprites count], [newSprites count]);
+    
+    //Cleanup
+    for(Sprite *destroyableSprite in destroyableSprites) {
+        for(Sprite *sprite in sprites) {
+            if(destroyableSprite == sprite) {
+                [sprites removeObject: sprite];
+                break;
+            }
+        }
+    }
+    
+    //Neue Sprites hinzufügen
+    for (Sprite *newSprite in newSprites){
+        [sprites addObject: newSprite];
+    }
+    
+    [destroyableSprites removeAllObjects];
+    [newSprites removeAllObjects];
+}
+
+- (void)renderSprites
+{
+    for (Sprite *sprite in sprites) {
+        if ([sprite isActive]) {
+            [self checkSprite: sprite];
+            if ([sprite getType] != PLAYER) {
+                [sprite draw];
+            }
+        } else {
+            [destroyableSprites addObject: sprite];
+        }
+    }
+    //Der Player soll nicht von anderen Sprites verdeckt werden
+    //und wird deshalb als letztes Sprite gerendert.
+    [player draw];
+}
+
 
 - (NSMutableDictionary *) getDictionary
 {
