@@ -75,7 +75,7 @@
 
 - (void)loop
 {
-	[gameView drawRect:[UIScreen mainScreen].applicationFrame];
+	[gameView drawRect:CGRectMake(0, 0, 480, 320)];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

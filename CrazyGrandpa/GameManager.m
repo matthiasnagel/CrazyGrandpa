@@ -44,7 +44,7 @@ int H=320;
 
 - (void)preloader
 {
-    playerTexture = [self getTexture:@"player.png" isImage:YES];
+    playerTexture = [self getTexture:@"boy-sprite.png" isImage:YES];
     int playerW = [playerTexture getWidth];
     int playerH = [playerTexture getHeight];
     
@@ -53,7 +53,7 @@ int H=320;
     playerY = H/2 - playerH/2;
     
     //Parallax-Layer
-    back = [[ParallaxLayer alloc] initWithImage: @"background.png"];
+    back = [[ParallaxLayer alloc] initWithImage: @"testbg.png"];
     clouds = [[ParallaxLayer alloc] initWithImage: @"clouds.png"];
     
     [self setOpenGlProjection];
@@ -81,6 +81,8 @@ int H=320;
 {
     W = frame.size.width;
     H = frame.size.height;
+    
+    
     switch (state) {
         case LOAD_GAME:
             [self loadGame];
@@ -150,8 +152,8 @@ int H=320;
     [self scrollWorld];
     
     //Player nach oben bewegen
-    playerX += 0;
-    playerY -= 1;
+    playerX += 1;
+    playerY -= 0;
     
     //Parallax-Ebenen rendern
     [back drawWithFactor:2 realtiveTo:CGPointMake(playerX, playerY) atOrigin:[self getViewportOrigin]];

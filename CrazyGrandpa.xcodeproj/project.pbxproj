@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FF0172E515D6A74B0083131B /* boy-sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0172E415D6A74B0083131B /* boy-sprite.png */; };
+		FF04ACBF15D6CE28004B0987 /* testbg.png in Resources */ = {isa = PBXBuildFile; fileRef = FF04ACBD15D6CE28004B0987 /* testbg.png */; };
+		FF04ACC015D6CE28004B0987 /* testbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF04ACBE15D6CE28004B0987 /* testbg@2x.png */; };
 		FF06F8A815D674F700426E40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF06F8A715D674F700426E40 /* UIKit.framework */; };
 		FF06F8AA15D674F700426E40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF06F8A915D674F700426E40 /* Foundation.framework */; };
 		FF06F8AC15D674F700426E40 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF06F8AB15D674F700426E40 /* CoreGraphics.framework */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		FF0172E415D6A74B0083131B /* boy-sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boy-sprite.png"; sourceTree = "<group>"; };
+		FF04ACBD15D6CE28004B0987 /* testbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testbg.png; sourceTree = "<group>"; };
+		FF04ACBE15D6CE28004B0987 /* testbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testbg@2x.png"; sourceTree = "<group>"; };
 		FF06F8A315D674F700426E40 /* CrazyGrandpa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrazyGrandpa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF06F8A715D674F700426E40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FF06F8A915D674F700426E40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -79,6 +83,8 @@
 		FF0172E015D6A5630083131B /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				FF04ACBD15D6CE28004B0987 /* testbg.png */,
+				FF04ACBE15D6CE28004B0987 /* testbg@2x.png */,
 				FF2E941715D6B7CA00478486 /* background.png */,
 				FF2E941B15D6B80900478486 /* player.png */,
 				FF2E941815D6B7CA00478486 /* clouds.png */,
@@ -216,6 +222,8 @@
 				FF2E941915D6B7CA00478486 /* background.png in Resources */,
 				FF2E941A15D6B7CA00478486 /* clouds.png in Resources */,
 				FF2E941C15D6B80900478486 /* player.png in Resources */,
+				FF04ACBF15D6CE28004B0987 /* testbg.png in Resources */,
+				FF04ACC015D6CE28004B0987 /* testbg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

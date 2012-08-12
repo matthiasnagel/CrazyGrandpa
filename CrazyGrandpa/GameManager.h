@@ -16,7 +16,9 @@ extern int H;
 
 typedef enum {
     LOAD_GAME,
-    PLAY_GAME
+    START_GAME,
+    PLAY_GAME,
+    GAME_OVER
 } States;
 
 @interface GameManager : NSObject
