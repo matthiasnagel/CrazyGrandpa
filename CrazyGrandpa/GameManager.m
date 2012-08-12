@@ -98,16 +98,16 @@ int H=320;
         [newSprites addObject: player];
         [player release];
         return player;
-    } else if (type == BULLET) {
-        Bullet *bullet = [[Bullet alloc] initWithImage: @"bullets.png"
-                                            frameCnt: 1
-                                           frameStep: 0
-                                               speed: sxy
-                                                 pos: pxy];
-        [bullet setType: BULLET];
-        [newSprites addObject: bullet];
-        [bullet release];
-        return bullet;
+//    } else if (type == BULLET) {
+//        Bullet *bullet = [[Bullet alloc] initWithImage: @"bullets.png"
+//                                            frameCnt: 1
+//                                           frameStep: 0
+//                                               speed: sxy
+//                                                 pos: pxy];
+//        [bullet setType: BULLET];
+//        [newSprites addObject: bullet];
+//        [bullet release];
+//        return bullet;
     } else if (type == GEAR) {
         Gear *gear = [[Gear alloc] initWithImage: @"gear.png"
                                       frameCnt: 1
@@ -118,16 +118,16 @@ int H=320;
         [newSprites addObject: gear];
         [gear release];
         return gear;
-    } else if (type == OCTO) {
-        Octo *octo = [[Octo alloc] initWithImage: @"octo_8f.png"
-                                      frameCnt: 8
-                                     frameStep: 3
-                                         speed: sxy
-                                           pos: pxy];
-        [octo setType: OCTO];
-        [newSprites addObject: octo];
-        [octo release];
-        return octo;
+//    } else if (type == OCTO) {
+//        Octo *octo = [[Octo alloc] initWithImage: @"octo_8f.png"
+//                                      frameCnt: 8
+//                                     frameStep: 3
+//                                         speed: sxy
+//                                           pos: pxy];
+//        [octo setType: OCTO];
+//        [newSprites addObject: octo];
+//        [octo release];
+//        return octo;
     } else if (type == MINE) {
         Mine *mine = [[Mine alloc] initWithImage: @"mine.png"
                                       frameCnt: 1
@@ -138,16 +138,16 @@ int H=320;
         [newSprites addObject: mine];
         [mine release];
         return mine;
-    } else if (type == FIGHTER) {
-        Fighter *fighter = [[Fighter alloc] initWithImage: @"fighter.png"
-                                               frameCnt: 1
-                                              frameStep: 0
-                                                  speed: sxy
-                                                    pos: pxy];
-        [fighter setType: FIGHTER];
-        [newSprites addObject: fighter];
-        [fighter release];
-        return fighter;
+//    } else if (type == FIGHTER) {
+//        Fighter *fighter = [[Fighter alloc] initWithImage: @"fighter.png"
+//                                               frameCnt: 1
+//                                              frameStep: 0
+//                                                  speed: sxy
+//                                                    pos: pxy];
+//        [fighter setType: FIGHTER];
+//        [newSprites addObject: fighter];
+//        [fighter release];
+//        return fighter;
     } else if (type == ANIMATION) {
         Animation *ani = [[Animation alloc] initWithImage: @"explosion_8f.png"
                                                frameCnt: 8
@@ -178,7 +178,8 @@ int H=320;
 - (void) touchBegan: (CGPoint) p {
     [self handleStates];
     if (state == PLAY_GAME && player) {
-        [player setTouch: p];
+        //[player setTouch: p];
+        [player setGlideFactor:1.5];
     }
 }
 
@@ -234,11 +235,11 @@ int H=320;
 - (void)playGame
 {
     timer++;
-    [self scrollWorld];
+    //[self scrollWorld];
     
     //Parallax-Ebenen
-    [back drawWithFactor:2 realtiveTo:[player getPos] atOrigin:[self getViewportOrigin]];
-    [clouds drawWithFactor:1 realtiveTo:[player getPos] atOrigin:[self getViewportOrigin]];
+    [back drawWithFactor:2 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
+    [clouds drawWithFactor:1 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
     
     [self generateNewObjects];
     [self manageSprites];

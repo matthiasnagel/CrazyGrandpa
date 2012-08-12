@@ -15,10 +15,15 @@
     bool moveLeft;
     int speedScalar;
     bool dead;
+    int counter;
+    int positionX;
+    double glideFactor;
 }
 
 - (void)setTouch:(CGPoint)touchPoint;
 - (void)touchEnded;
 - (void)fire;
+- (CGPoint)getParallaxPosition;
+- (void)setGlideFactor:(double)factor;
 
 @end
