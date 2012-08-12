@@ -2,7 +2,7 @@
 //  GameViewController.h
 //  CrazyGrandpa
 //
-//  Created by Kon Ehlers on 11.08.12.
+//  Created by Konstantin Ehlers & Matthias Nagel on 11.08.12.
 //  Copyright (c) 2012 KoMa Games. All rights reserved.
 //
 
