@@ -18,7 +18,8 @@ typedef enum {
     OCTO,
     MINE,
     FIGHTER,
-    ANIMATION
+    ANIMATION,
+    TERRAIN
 } SpriteType;
 
 @interface Sprite : NSObject

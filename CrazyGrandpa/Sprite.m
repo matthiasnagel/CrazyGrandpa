@@ -33,9 +33,9 @@
         angle = 0;
         type = -1;
         tolBB = 10; //Bounding Box enger ziehen
-        forceIdleness = false;
-        active = true;
-        autoDestroy = false;
+        forceIdleness = NO;
+        active = YES;
+        autoDestroy = NO;
         [self additionalSetup];
     }
     
