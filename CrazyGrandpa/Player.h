@@ -15,9 +15,11 @@
     bool moveLeft;
     int speedScalar;
     bool dead;
+    int timeCounter;
     int counter;
     int positionX;
     double glideFactor;
+    double startheight;
 }
 
 - (void)setTouch:(CGPoint)touchPoint;

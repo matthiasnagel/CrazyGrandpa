@@ -28,26 +28,52 @@
     //speed.y = -speedScalar; //Konstante Bewegung nach "vorne"
     speed.x = 80.0;
     speed.y = 0;
+    startheight = 60;
     
-    counter = 0;
+    timeCounter = 0;
+}
+
+- (void)resetCounter {
+    timeCounter = 0;
 }
 
 - (void)draw
 {
+    timeCounter++;
     counter++;
-        
-    double g = 1.81;
-    double v0 = 80.0;
-      
-    pos.x = 60;
-    positionX = v0 * counter / 10.0;
-    //pos.y = g/2 * pow(counter / 10.0, 2) * -glideFactor;
-    pos.y += g*(counter/10)*glideFactor;
     
-    speed.x = speed.x;
-    speed.y = g * counter / 10.0;
+    double v0 = 80.0;
+    
+    
+    double vX = v0 * glideFactor;
+    double vY = glideFactor * timeCounter;
+    
+    positionX = sqrt(pow(vX, 2) + pow(vY,2)) * counter / 40.0;
+    
+    double bla = v0 * timeCounter / 10.0;
+    
+    pos.y = -glideFactor * pow(bla,2) / pow(v0,2) / 2 + startheight;
+    pos.x = 60;
+    
+//    double g = -1.81;
+//    double v0 = 80.0;
+//      
+//    pos.x = 60;
+//    positionX = v0 * timeCounter / 10.0;
+    //pos.y = g/2 * pow(counter / 10.0, 2) * -glideFactor;
+    //pos.y += g*(timeCounter/10)*glideFactor;
+//    pos.y += glideFactor;
+//    
+//    double vX = v0 * glideFactor;
+//    double vY = g*timeCounter;
+    
+    //double vnow = sqrt(pow(vX, 2) + pow(vY,2));
+    
+//    speed.x = speed.x;
+    speed.y = glideFactor * timeCounter / 10.0;
+    //speed.y = vnow;
         
-    angle = speed.y*10/speed.x * 10;
+    angle = -speed.y * 10 / speed.x * 10;
         
     if (!dead) {
         [self fire];
@@ -90,6 +116,8 @@
 {
     touchAction = false;
     glideFactor = -1.5;
+    startheight = pos.y;
+    [self resetCounter];
 }
 
 - (void)hit
@@ -111,6 +139,8 @@
 - (void)setGlideFactor:(double)factor
 {
     glideFactor = factor;
+    startheight = pos.y;
+    [self resetCounter];
 }
 
 

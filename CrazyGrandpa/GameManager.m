@@ -179,7 +179,7 @@ int H=320;
     [self handleStates];
     if (state == PLAY_GAME && player) {
         //[player setTouch: p];
-        [player setGlideFactor:1.5];
+        [player setGlideFactor:4.5];
     }
 }
 
@@ -239,7 +239,7 @@ int H=320;
     
     //Parallax-Ebenen
     [back drawWithFactor:2 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
-    [clouds drawWithFactor:1 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
+    //[clouds drawWithFactor:1 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
     
     [self generateNewObjects];
     [self manageSprites];
