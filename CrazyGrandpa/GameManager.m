@@ -66,10 +66,13 @@ int H=320;
     [self getTexture: @"mine.png" isImage: YES];
     [self getTexture: @"bullets.png" isImage: YES];
     [self getTexture: @"gear.png" isImage: YES];
+    [self getTexture: @"clouds.png" isImage: YES];
         
     //Parallax-Layer
     back = [[ParallaxLayer alloc] initWithImage: @"testbg.png"];
     clouds = [[ParallaxLayer alloc] initWithImage: @"clouds.png"];
+    
+    terrain = [[Terrain alloc] init];
     
     [self setOpenGlProjection];
     state = LOAD_GAME;
@@ -84,10 +87,6 @@ int H=320;
     [self createSprite: PLAYER
                  speed: CGPointMake(0, 0)
                    pos: CGPointMake(0, 0)];
-    
-//    Terrain *terrain = [[[Terrain alloc] init] autorelease];
-//    [terrain setType:TERRAIN];
-//    [newSprites addObject:terrain];
 }
 
 - (id) createSprite: (SpriteType) type
@@ -169,7 +168,8 @@ int H=320;
     }
 }
 
-- (void) createExplosionFor: (Sprite *) sprite {
+- (void) createExplosionFor: (Sprite *) sprite
+{
     CGPoint p = [Animation getOriginBasedOnCenterOf: [sprite getRect]
                                              andPic: @"explosion_8f.png"
                                        withFrameCnt: 8];
@@ -245,6 +245,8 @@ int H=320;
     //Parallax-Ebenen
     [back drawWithFactor:2 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
     [clouds drawWithFactor:1 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
+    
+    [terrain setOffsetX:[player getParallaxPosition].x];
     
     [self generateNewObjects];
     [self manageSprites];

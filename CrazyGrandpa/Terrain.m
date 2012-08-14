@@ -9,14 +9,13 @@
 #import "Terrain.h"
 #import <OpenGLES/ES1/gl.h>
 #import "GameManager.h"
+#import "Texture.h"
 
 @implementation Terrain
 
 - (id)init
 {
 	if ((self = [super init])) {
-        
-        active = YES;
 		
 		screenW = 480.0;
 		screenH = 320.0;
@@ -103,10 +102,6 @@
 		p0 = p1;
 	}
     //	CCLOG(@"nBorderVertices = %d", nBorderVertices);
-    
-    for (int i = 0; i < nBorderVertices; i++) {
-        [[GameManager getInstance] drawOpenGlLineFrom:CGPointMake(borderVertices[i].x, borderVertices[i].y) to:CGPointMake(borderVertices[i+1].x, borderVertices[i+1].y)];
-    }
 }
 
 - (void) resetHillVertices
@@ -188,16 +183,22 @@
 
 - (void)draw
 {
-//	glBindTexture(GL_TEXTURE_2D, _stripes.texture.name);
-	
-//	glDisableClientState(GL_COLOR_ARRAY);
-//	
-	glColor4f(1, 1, 1, 1);
-	glVertexPointer(2, GL_FLOAT, 0, hillVertices);
-	glTexCoordPointer(2, GL_FLOAT, 0, hillTexCoords);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nHillVertices);
-//
-//	glEnableClientState(GL_COLOR_ARRAY);
+//    Texture *tex = [[GameManager getInstance] getTexture:@"clouds.png" isImage: YES];
+    
+    
+    glEnable(GL_TEXTURE_2D); //alle Flaechen werden nun texturiert
+    
+    glColor4f(1, 0, 0, 1);
+//    glBindTexture(GL_TEXTURE_2D, [tex getTextureID]);
+    glVertexPointer(2, GL_FLOAT, 0, hillVertices);
+//    glTexCoordPointer(2, GL_SHORT, 0, hillTexCoords);
+    
+    glPushMatrix();
+    glTranslatef(pos.x, pos.y, 0);
+    glDrawArrays(GL_LINES, 0, (GLsizei)nHillVertices);
+    glPopMatrix();
+    
+    glDisable(GL_TEXTURE_2D);
 }
 
 - (void)drawFrame
@@ -213,6 +214,7 @@
 		_offsetX = offsetX;
 		pos = CGPointMake(screenW/8-_offsetX*1.0, 0);
 		[self resetHillVertices];
+        [self draw];
 	}
 }
 
