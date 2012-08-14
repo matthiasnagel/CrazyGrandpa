@@ -17,6 +17,7 @@
 #import "Animation.h"
 #import "Mine.h"
 #import "Fighter.h"
+#import "Terrain.h"
 
 int W=480;
 int H=320;
@@ -83,6 +84,10 @@ int H=320;
     [self createSprite: PLAYER
                  speed: CGPointMake(0, 0)
                    pos: CGPointMake(0, 0)];
+    
+//    Terrain *terrain = [[[Terrain alloc] init] autorelease];
+//    [terrain setType:TERRAIN];
+//    [newSprites addObject:terrain];
 }
 
 - (id) createSprite: (SpriteType) type
