@@ -26,8 +26,8 @@
     pos.y = 30; //start position
     pos.x = 60;
     vX = 80.0;
-    vmax = 180.0;
-    vmin = 20.0;
+    vmax = 280.0;
+    vmin = 60.0;
     
     boostActive = false;
 }
@@ -40,7 +40,7 @@
         vX += (vmax - vX) * 0.02;
     }
     
-    positionX += vX * 0.2;
+    positionX += vX * 0.09;
     
     pos.y += (80 - vX) * 0.025;
     
