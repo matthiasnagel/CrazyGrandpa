@@ -17,63 +17,37 @@
 {
     touchAction = false;
     
-    //Spieler zentrieren
-    pos.x = W/2 - frameW/2;
-    pos.y = H/2 - frameH/2;
-    
     dead = false;
     angle = 0;
-    speedScalar = 5;
-    glideFactor = -1.5;
-    //speed.y = -speedScalar; //Konstante Bewegung nach "vorne"
     speed.x = 80.0;
     speed.y = 0;
-    startheight = 60;
     
-    timeCounter = 0;
-}
-
-- (void)resetCounter {
-    timeCounter = 0;
+    //todo save pos.y (startposition), pos.x, vx, vmax and vmin in const.h
+    pos.y = 30; //start position
+    pos.x = 60;
+    vX = 80.0;
+    vmax = 180.0;
+    vmin = 20.0;
+    
+    boostActive = false;
 }
 
 - (void)draw
 {
-    timeCounter++;
-    counter++;
+    if(!boostActive) {
+        vX += (vmin - vX) * 0.02;
+    } else {
+        vX += (vmax - vX) * 0.02;
+    }
     
-    double v0 = 80.0;
+    positionX += vX * 0.2;
     
+    pos.y += (80 - vX) * 0.025;
     
-    double vX = v0 * glideFactor;
-    double vY = glideFactor * timeCounter;
-    
-    positionX = sqrt(pow(vX, 2) + pow(vY,2)) * counter / 40.0;
-    
-    double bla = v0 * timeCounter / 10.0;
-    
-    pos.y = -glideFactor * pow(bla,2) / pow(v0,2) / 2 + startheight;
-    pos.x = 60;
-    
-//    double g = -1.81;
-//    double v0 = 80.0;
-//      
-//    pos.x = 60;
-//    positionX = v0 * timeCounter / 10.0;
-    //pos.y = g/2 * pow(counter / 10.0, 2) * -glideFactor;
-    //pos.y += g*(timeCounter/10)*glideFactor;
-//    pos.y += glideFactor;
-//    
-//    double vX = v0 * glideFactor;
-//    double vY = g*timeCounter;
-    
-    //double vnow = sqrt(pow(vX, 2) + pow(vY,2));
-    
-//    speed.x = speed.x;
-    speed.y = glideFactor * timeCounter / 10.0;
-    //speed.y = vnow;
+    speed.x = speed.x;
+    speed.y = sqrt(pow(vX, 2) + pow(vY,2));
         
-    angle = -speed.y * 10 / speed.x * 10;
+    angle = (-speed.y / speed.x) * 20 + 20;
         
     if (!dead) {
         [self fire];
@@ -114,10 +88,7 @@
 
 - (void)touchEnded
 {
-    touchAction = false;
-    glideFactor = -1.5;
-    startheight = pos.y;
-    [self resetCounter];
+    boostActive = FALSE;
 }
 
 - (void)hit
@@ -138,9 +109,7 @@
 
 - (void)setGlideFactor:(double)factor
 {
-    glideFactor = factor;
-    startheight = pos.y;
-    [self resetCounter];
+    boostActive = TRUE;
 }
 
 

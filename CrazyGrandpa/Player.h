@@ -8,18 +8,20 @@
 
 #import "Sprite.h"
 
+
 @interface Player : Sprite
 {
     CGPoint touchPoint;
     bool touchAction;
     bool moveLeft;
-    int speedScalar;
     bool dead;
-    int timeCounter;
-    int counter;
     int positionX;
-    double glideFactor;
-    double startheight;
+    double vX;
+    double vY;
+    double v0;
+    double vmin;
+    double vmax;
+    BOOL boostActive;
 }
 
 - (void)setTouch:(CGPoint)touchPoint;
