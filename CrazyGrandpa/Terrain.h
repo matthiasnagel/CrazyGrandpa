@@ -13,6 +13,8 @@
 #define kMaxBorderVertices 5000
 #define kHillSegmentWidth 15
 
+@class Texture;
+
 typedef struct _ccVertex2F
 {
 	GLfloat x;
@@ -34,6 +36,7 @@ typedef struct _ccVertex2F
 	int screenW;
 	int screenH;
 	int textureSize;
+    Texture *tex;
 }
 
 - (void)setOffsetX:(float)offsetX;
