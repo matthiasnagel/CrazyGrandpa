@@ -12,6 +12,7 @@
 @class Player;
 @class ParallaxLayer;
 @class Texture;
+@class Terrain;
 
 extern int W;
 extern int H;
@@ -43,6 +44,8 @@ typedef enum {
 
     //Current Frame
     int timer;
+    
+    Terrain *terrain;
 }
 
 //Init Methods

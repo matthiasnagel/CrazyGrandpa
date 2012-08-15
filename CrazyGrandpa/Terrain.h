@@ -36,4 +36,6 @@ typedef struct _ccVertex2F
 	int textureSize;
 }
 
+- (void)setOffsetX:(float)offsetX;
+
 @end
