@@ -15,22 +15,17 @@
     bool touchAction;
     bool moveLeft;
     bool dead;
+    
     int positionX;
     double vX;
     double vY;
     double v0;
     double vmin;
     double vmax;
-    double boostFactor;
-    double controlFactor;
-    BOOL boostActive;
     
-    //segeflugformel test
-    double A;
-    double W;
-    double V;
-    double u;
-    double g;
+    BOOL boostActive;
+    BOOL moveUp;
+    BOOL moveDown;
 }
 
 - (void)setTouch:(CGPoint)touchPoint;

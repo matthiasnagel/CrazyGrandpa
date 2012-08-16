@@ -26,32 +26,66 @@
     pos.y = 30; //start position
     pos.x = 60;
     vX = 80.0;
-    vmax = 280.0;
+    vmax = 300.0;
     vmin = 100.0;
     
     boostActive = false;
+    
+    moveDown = false;
+    moveUp = false;
 }
 
 - (void)draw
 {
-    if(!boostActive) {
+    if(boostActive) {
+        vX += (vmax - vX) * 0.02;
+    } else if(moveUp) {
+        vX += (vmax - vX) * 0.02;
+    } else if(moveDown) {
         vX += (vmin - vX) * 0.02;
     } else {
-        vX += (vmax - vX) * 0.02;
+        vX += (vmin - vX) * 0.02;
     }
     
-    //V = (A + W + g) / 2 + (vX * 0.04);
+    if(moveUp) {
+        //pos.y += (120 - vX) * 0.10;
+        vX += 3;
+    } else if(moveDown) {
+        //pos.y += 3;
+        vX -= 3;
+    } else {
+        //vX += (vmin - vX) * 0.02;
+    }
     
-    u = V - W;
+    pos.y += (120 - vX) * 0.10;
     
     positionX += vX * 0.09;
-    pos.y += (120 - vX) * 0.10;
+    
+    if(pos.y > 600) {
+        pos.y = 600;
+    }
+    if(pos.y < 0) {
+        pos.y = 0;
+    }
     
     speed.x = speed.x;
     speed.y = sqrt(pow(vX, 2) + pow(vY,2));
         
     angle = (-speed.y / speed.x) * 20 + 25;
-        
+    
+    //Manage zoom & background position
+    GameManager *gm = [GameManager getInstance];
+    
+    double factor = (((vX - 100) / 2) / 100) + 0.5;
+    factor = factor / 2 + 0.5;
+    if (factor < 0.5) { factor = 0.5; } else if (factor > 1.0) { factor = 1.0; }
+    
+    double dY = -pos.y+50;
+    
+    if(dY > 0) { dY = 0; }
+    
+    [gm setZoomFactor:factor to:dY];
+    
     if (!dead) {
         [self fire];
         [self drawFrame];
@@ -80,23 +114,28 @@
 - (void)setTouch:(CGPoint)point
 {
     touchAction = true;
-    if (point.x < 200) {
-        //schnauze runter
-        //moveLeft = YES;
-        A = -1;
-        NSLog(@"left");
+    if (point.x < 100) {
+        moveUp = TRUE;
+        moveDown = FALSE;
+        boostActive = FALSE;
+    } else if (point.x > 100 && point.x < 300) {
+        NSLog(@"middle");
+        boostActive = TRUE;
+        moveDown = FALSE;
+        moveUp = FALSE;
     } else {
-        //schnauze hoch
-        //moveLeft = NO;
-        A = +2;
+        moveDown = TRUE;
+        moveUp = FALSE;
+        boostActive = FALSE;
         NSLog(@"right");
-    }
-    boostActive = TRUE;
-}
+    }}
 
 - (void)touchEnded
 {
     boostActive = FALSE;
+    moveUp = FALSE;
+    moveDown = FALSE;
+    NSLog(@"touch ended.");
 }
 
 - (void)hit

@@ -81,6 +81,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    //glViewport(0, 0, viewportWidth, viewportHeight);
     glViewport(0, 0, viewportWidth, viewportHeight);
     glClearColor(1.0,1.0,1.0,1.0);
     

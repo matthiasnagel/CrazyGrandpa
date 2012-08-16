@@ -10,8 +10,6 @@
 		560C7A7415DC37C500067E65 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = 560C7A7315DC37C500067E65 /* pattern1.png */; };
 		561B262F15DC390F0068B93A /* TerrainTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 561B262E15DC390F0068B93A /* TerrainTexture.m */; };
 		FF0172E515D6A74B0083131B /* boy-sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0172E415D6A74B0083131B /* boy-sprite.png */; };
-		FF04ACBF15D6CE28004B0987 /* testbg.png in Resources */ = {isa = PBXBuildFile; fileRef = FF04ACBD15D6CE28004B0987 /* testbg.png */; };
-		FF04ACC015D6CE28004B0987 /* testbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF04ACBE15D6CE28004B0987 /* testbg@2x.png */; };
 		FF06F8A815D674F700426E40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF06F8A715D674F700426E40 /* UIKit.framework */; };
 		FF06F8AA15D674F700426E40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF06F8A915D674F700426E40 /* Foundation.framework */; };
 		FF06F8AC15D674F700426E40 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF06F8AB15D674F700426E40 /* CoreGraphics.framework */; };
@@ -45,6 +43,7 @@
 		FF5A0C2415D7FBB000F7CD60 /* Octo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2315D7FBB000F7CD60 /* Octo.m */; };
 		FF5A0C2715D7FBBA00F7CD60 /* Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2615D7FBB900F7CD60 /* Mine.m */; };
 		FF5A0C2A15D7FBC300F7CD60 /* Fighter.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5A0C2915D7FBC300F7CD60 /* Fighter.m */; };
+		FF5D88B215DCE2670095EFBB /* testbg.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5D88B115DCE2670095EFBB /* testbg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,8 +51,6 @@
 		561B262D15DC390F0068B93A /* TerrainTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainTexture.h; sourceTree = "<group>"; };
 		561B262E15DC390F0068B93A /* TerrainTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainTexture.m; sourceTree = "<group>"; };
 		FF0172E415D6A74B0083131B /* boy-sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boy-sprite.png"; sourceTree = "<group>"; };
-		FF04ACBD15D6CE28004B0987 /* testbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testbg.png; sourceTree = "<group>"; };
-		FF04ACBE15D6CE28004B0987 /* testbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testbg@2x.png"; sourceTree = "<group>"; };
 		FF06F8A315D674F700426E40 /* CrazyGrandpa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrazyGrandpa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF06F8A715D674F700426E40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FF06F8A915D674F700426E40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -107,6 +104,7 @@
 		FF5A0C2615D7FBB900F7CD60 /* Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine.m; sourceTree = "<group>"; };
 		FF5A0C2815D7FBC300F7CD60 /* Fighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fighter.h; sourceTree = "<group>"; };
 		FF5A0C2915D7FBC300F7CD60 /* Fighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fighter.m; sourceTree = "<group>"; };
+		FF5D88B115DCE2670095EFBB /* testbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testbg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +126,8 @@
 		FF0172E015D6A5630083131B /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				FF5D88B115DCE2670095EFBB /* testbg.png */,
 				FF5A0C0C15D7F3FB00F7CD60 /* test */,
-				FF04ACBD15D6CE28004B0987 /* testbg.png */,
-				FF04ACBE15D6CE28004B0987 /* testbg@2x.png */,
 				FF0172E415D6A74B0083131B /* boy-sprite.png */,
 			);
 			name = Ressources;
@@ -299,8 +296,6 @@
 			files = (
 				FF06F8B215D674F700426E40 /* InfoPlist.strings in Resources */,
 				FF0172E515D6A74B0083131B /* boy-sprite.png in Resources */,
-				FF04ACBF15D6CE28004B0987 /* testbg.png in Resources */,
-				FF04ACC015D6CE28004B0987 /* testbg@2x.png in Resources */,
 				FF5A0C1615D7F47900F7CD60 /* fighter.png in Resources */,
 				FF5A0C1715D7F47900F7CD60 /* gear.png in Resources */,
 				FF5A0C1815D7F47900F7CD60 /* background.png in Resources */,
@@ -311,6 +306,7 @@
 				FF5A0C1D15D7F47900F7CD60 /* mine.png in Resources */,
 				FF5A0C1E15D7F47900F7CD60 /* player.png in Resources */,
 				560C7A7415DC37C500067E65 /* pattern1.png in Resources */,
+				FF5D88B215DCE2670095EFBB /* testbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,10 +401,12 @@
 		FF06F8BC15D674F700426E40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Konstantin Ehlers (27TXS7J3F8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrazyGrandpa/CrazyGrandpa-Prefix.pch";
 				INFOPLIST_FILE = "CrazyGrandpa/CrazyGrandpa-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "28E79FD6-6551-462D-9742-A95E9B932A0A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

@@ -19,8 +19,11 @@
 #import "Fighter.h"
 #import "Terrain.h"
 
-int W=480;
-int H=320;
+//int W=480;
+//int H=320;
+int W=960;
+int H=640;
+
 
 @implementation GameManager
 
@@ -185,8 +188,6 @@ int H=320;
     [self handleStates];
     if (state == PLAY_GAME && player) {
         [player setTouch: p];
-        //NSLog(@"SET TOUCH");
-        //[player setGlideFactor:4.5];
     }
 }
 
@@ -213,8 +214,8 @@ int H=320;
 
 - (void)drawStatesWithFrame:(CGRect)frame
 {
-    W = frame.size.width;
-    H = frame.size.height;
+    //W = frame.size.width;
+    //H = frame.size.height;
     CGPoint o = [self getViewportOrigin];
     switch (state) {
         case LOAD_GAME:
@@ -242,10 +243,9 @@ int H=320;
 - (void)playGame
 {
     timer++;
-    //[self scrollWorld];
     
     //Parallax-Ebenen
-    [back drawWithFactor:2 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
+    [back drawWithFactor:3 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
     //[clouds drawWithFactor:1 realtiveTo:[player getParallaxPosition] atOrigin:[self getViewportOrigin]];
     
     [terrain setOffsetX:[player getParallaxPosition].x];
@@ -255,15 +255,6 @@ int H=320;
     [self renderSprites];
 }
 
-- (void)scrollWorld
-{
-    CGPoint p = [player getPos];
-    CGRect r = [player getRect];
-    xt = W/2 - r.size.width/2 - p.x;
-    yt = H/2 - r.size.height/2 - p.y;
-    glLoadIdentity();
-    glTranslatef(xt, yt, 0);
-}
 
 - (CGPoint)getViewportOrigin
 {
@@ -376,8 +367,8 @@ int H=320;
     //Set View
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrthof(0, W, H, 0, 0, 1); //2D-Perspektive
-    //left - right - bottom - top
+    glOrthof(0, W, H, 0, 0,1); //2D-Perspektive    //left - right - bottom - top
+    glTranslatef(0, 0, 0);
     //Origin = Oben links
     //Positive x-Achse zeigt nach rechts
     //Positive y-Achse zeigt nach unten
@@ -518,6 +509,66 @@ int H=320;
 		NSLog(@"Dictionary angelegt!");
 	}
 	return dictionary;
+}
+
+
+//- (void)startZoom:(double)factor in:(double)seconds to:(double)dY {
+//    zoomFactor = currentZoomFactor - factor;
+//    
+//    zoomToY = dY;
+//    zoomTimerSeconds = seconds;
+//    zoomTimerStarted = timer;
+//    zoomActive = TRUE;
+//    factorAlreadyDone = 0;
+//    zoomDYAlreadyDone = 0;
+//}
+
+//- (void)zoom {
+//    double timeleft = zoomTimerSeconds - (timer - zoomTimerStarted);
+//    
+//    if(timeleft <=0) {
+//        zoomActive = FALSE;
+//    } else {
+//        //double factorleft = ;
+//        double factorchange = (zoomFactor - factorAlreadyDone) / timeleft;
+//        
+//        factorAlreadyDone += factorchange;
+//        
+//        if(currentZoomFactor > zoomFactor) { //zoom in
+//            currentZoomFactor -= factorchange;
+//        } else { //zoom out
+//            currentZoomFactor += factorchange;
+//        }
+//        
+//        //double dYFactor = -400 + ((currentZoomFactor*2)*200);
+//        double dYleft = zoomToY - zoomDYAlreadyDone;
+//        double dYfactorchange = dYleft / timeleft;
+//        
+//        if(currentY > zoomToY) { //zoom in
+//            currentY -= dYfactorchange;
+//        } else { //zoom out
+//            currentY += dYfactorchange;
+//        }
+//        
+//        //NSLog(@"curY %f",currentY);
+//        
+//        //currentY += dYfactorchange;
+//        zoomDYAlreadyDone += dYfactorchange;
+//        
+//        glLoadIdentity();
+//        glMatrixMode(GL_PROJECTION);
+//        glOrthof(0, W*currentZoomFactor, H*currentZoomFactor, 0, 0,1); //2D-Perspektive    //left - right - bottom - top
+//        
+//        glTranslatef(0, yt, currentY);
+//    }
+//}
+
+- (void) setZoomFactor:(double)factor to:(double)dY {
+    glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
+    glOrthof(0, W*factor, H*factor, 0, 0,1); //2D-Perspektive    //left - right - bottom - top
+    
+    glTranslatef(0, dY, 0);
 }
 
 - (void) removeFromDictionary: (NSString*) name

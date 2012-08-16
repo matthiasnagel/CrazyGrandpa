@@ -17,9 +17,11 @@
 {
 	if ((self = [super init])) {
 		
-		screenW = 480.0;
-		screenH = 320.0;
-		
+		//screenW = 480.0;
+		//screenH = 320.0;
+		screenW = 960;
+        screenH = 640;
+        
         textureSize = 512;
         
 		[self generateHillKeyPoints];
@@ -47,10 +49,10 @@
 	y = screenH/2;
 	hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, y};
 	
-	int minDX = 160, rangeDX = 80;
-	int minDY = 40,  rangeDY = 70;
+	int minDX = 360, rangeDX = 80;
+	int minDY = 80,  rangeDY = 70;
 	float sign = -1; // +1 - going up, -1 - going  down
-	float maxHeight = 170;
+	float maxHeight = 200;
 	float minHeight = 20;
 	while (nHillKeyPoints < kMaxHillKeyPoints-1) {
 		dx = arc4random()%rangeDX+minDX;
@@ -61,13 +63,13 @@
 		if(ny < minHeight) ny = minHeight;
 		y = ny;
 		sign *= -1;
-		hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, 320-y};
+		hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, screenH-y};
         
 	}
     
 	// cliff
 	x += minDX+rangeDX;
-	y = 320.0;
+	y = screenH;
 	hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, y};
     
 	// adjust vertices for retina

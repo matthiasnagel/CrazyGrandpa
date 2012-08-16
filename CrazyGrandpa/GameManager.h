@@ -84,5 +84,7 @@ typedef enum {
 - (CGSize)getOpenGlImgDimension: (NSString*) picName;
 - (void)drawOpenGlString:(NSString*)text at:(CGPoint) p;
 - (Texture*)getTexture:(NSString*)name isImage:(bool)imgFlag;
+- (void)zoom:(double)factor in:(double)seconds;
+- (void)setZoomFactor:(double)factor to:(double)dY;
 
 @end
