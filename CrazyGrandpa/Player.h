@@ -21,7 +21,16 @@
     double v0;
     double vmin;
     double vmax;
+    double boostFactor;
+    double controlFactor;
     BOOL boostActive;
+    
+    //segeflugformel test
+    double A;
+    double W;
+    double V;
+    double u;
+    double g;
 }
 
 - (void)setTouch:(CGPoint)touchPoint;

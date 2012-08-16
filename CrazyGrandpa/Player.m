@@ -27,7 +27,7 @@
     pos.x = 60;
     vX = 80.0;
     vmax = 280.0;
-    vmin = 60.0;
+    vmin = 100.0;
     
     boostActive = false;
 }
@@ -40,14 +40,17 @@
         vX += (vmax - vX) * 0.02;
     }
     
-    positionX += vX * 0.09;
+    //V = (A + W + g) / 2 + (vX * 0.04);
     
-    pos.y += (80 - vX) * 0.025;
+    u = V - W;
+    
+    positionX += vX * 0.09;
+    pos.y += (120 - vX) * 0.10;
     
     speed.x = speed.x;
     speed.y = sqrt(pow(vX, 2) + pow(vY,2));
         
-    angle = (-speed.y / speed.x) * 20 + 20;
+    angle = (-speed.y / speed.x) * 20 + 25;
         
     if (!dead) {
         [self fire];
@@ -77,13 +80,18 @@
 - (void)setTouch:(CGPoint)point
 {
     touchAction = true;
-    if (point.x < W/2) {
-        //nach links steuern
-        moveLeft = YES;
+    if (point.x < 200) {
+        //schnauze runter
+        //moveLeft = YES;
+        A = -1;
+        NSLog(@"left");
     } else {
-        //nach rechts steuern
-        moveLeft = NO;
+        //schnauze hoch
+        //moveLeft = NO;
+        A = +2;
+        NSLog(@"right");
     }
+    boostActive = TRUE;
 }
 
 - (void)touchEnded

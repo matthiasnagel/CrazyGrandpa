@@ -163,7 +163,7 @@ int H=320;
         [ani release];
         return ani;
     } else {
-        NSLog(@"ERROR: Unbekannter Sprite-Typ: %i", type);
+        //NSLog(@"ERROR: Unbekannter Sprite-Typ: %i", type);
         return nil;
     }
 }
@@ -183,8 +183,9 @@ int H=320;
 - (void) touchBegan: (CGPoint) p {
     [self handleStates];
     if (state == PLAY_GAME && player) {
-        //[player setTouch: p];
-        [player setGlideFactor:4.5];
+        [player setTouch: p];
+        //NSLog(@"SET TOUCH");
+        //[player setGlideFactor:4.5];
     }
 }
 
@@ -232,7 +233,7 @@ int H=320;
             [self playGame];
             [self drawOpenGlString: @"G A M E  O V E R" at: CGPointMake(o.x, o.y)];
             break;
-        default: NSLog(@"ERROR: Unbekannter Spielzustand: %i", state);
+        default: //NSLog(@"ERROR: Unbekannter Spielzustand: %i", state);
             break;
     }
 }
