@@ -20,8 +20,12 @@
 		screenW = 480.0;
 		screenH = 320.0;
 		
+        textureSize = 512;
+        
 		[self generateHillKeyPoints];
 		[self generateBorderVertices];
+        
+        tex = [[GameManager getInstance] getTexture:@"pattern1.png" isImage: YES];
         
 		self.offsetX = 0;
 	}
@@ -35,7 +39,7 @@
 	float x, y, dx, dy, ny;
 	
 	x = -screenW/4;
-	y = screenH*3/4;
+	y = screenH*1/4;
 	hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, y};
     
 	// starting point
@@ -44,9 +48,9 @@
 	hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, y};
 	
 	int minDX = 160, rangeDX = 80;
-	int minDY = 60,  rangeDY = 60;
+	int minDY = 40,  rangeDY = 70;
 	float sign = -1; // +1 - going up, -1 - going  down
-	float maxHeight = screenH;
+	float maxHeight = 170;
 	float minHeight = 20;
 	while (nHillKeyPoints < kMaxHillKeyPoints-1) {
 		dx = arc4random()%rangeDX+minDX;
@@ -57,12 +61,13 @@
 		if(ny < minHeight) ny = minHeight;
 		y = ny;
 		sign *= -1;
-		hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, y};
+		hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, 320-y};
+        
 	}
     
 	// cliff
 	x += minDX+rangeDX;
-	y = 0;
+	y = 320.0;
 	hillKeyPoints[nHillKeyPoints++] = (ccVertex2F){x, y};
     
 	// adjust vertices for retina
@@ -101,7 +106,6 @@
 		
 		p0 = p1;
 	}
-    //	CCLOG(@"nBorderVertices = %d", nBorderVertices);
 }
 
 - (void) resetHillVertices
@@ -162,9 +166,12 @@
 				pt1.x = p0.x + j*dx;
 				pt1.y = ymid + ampl * cosf(da*j);
 				for (int k=0; k<vSegments+1; k++) {
-					hillVertices[nHillVertices] = (ccVertex2F){pt0.x, pt0.y-(float)textureSize/vSegments*k};
+					hillVertices[nHillVertices] = (ccVertex2F){pt0.x, pt0.y+(float)textureSize/vSegments*k};
+//                    NSLog(@"x: %.2f y: %.2f hillvertices: %d",hillVertices[nHillVertices].x,hillVertices[nHillVertices].y,nHillVertices);
 					hillTexCoords[nHillVertices++] = (ccVertex2F){pt0.x/(float)textureSize, (float)(k)/vSegments};
-					hillVertices[nHillVertices] = (ccVertex2F){pt1.x, pt1.y-(float)textureSize/vSegments*k};
+                    
+					hillVertices[nHillVertices] = (ccVertex2F){pt1.x, pt1.y+(float)textureSize/vSegments*k};
+//                    NSLog(@"x: %.2f y: %.2f hillvertices: %d",hillVertices[nHillVertices].x,hillVertices[nHillVertices].y,nHillVertices);
 					hillTexCoords[nHillVertices++] = (ccVertex2F){pt1.x/(float)textureSize, (float)(k)/vSegments};
 				}
 				pt0 = pt1;
@@ -183,19 +190,16 @@
 
 - (void)draw
 {
-//    Texture *tex = [[GameManager getInstance] getTexture:@"clouds.png" isImage: YES];
-    
-    
     glEnable(GL_TEXTURE_2D); //alle Flaechen werden nun texturiert
     
-    glColor4f(1, 0, 0, 1);
-//    glBindTexture(GL_TEXTURE_2D, [tex getTextureID]);
+    glColor4f(1, 1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, [tex getTextureID]);
     glVertexPointer(2, GL_FLOAT, 0, hillVertices);
-//    glTexCoordPointer(2, GL_SHORT, 0, hillTexCoords);
+    glTexCoordPointer(2, GL_SHORT, 0, hillTexCoords);
     
     glPushMatrix();
     glTranslatef(pos.x, pos.y, 0);
-    glDrawArrays(GL_LINES, 0, (GLsizei)nHillVertices);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nHillVertices);
     glPopMatrix();
     
     glDisable(GL_TEXTURE_2D);

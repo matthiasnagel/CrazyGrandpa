@@ -67,6 +67,7 @@ int H=320;
     [self getTexture: @"bullets.png" isImage: YES];
     [self getTexture: @"gear.png" isImage: YES];
     [self getTexture: @"clouds.png" isImage: YES];
+    [self getTexture: @"pattern1.png" isImage:YES];
         
     //Parallax-Layer
     back = [[ParallaxLayer alloc] initWithImage: @"testbg.png"];

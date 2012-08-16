@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560C7A7415DC37C500067E65 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = 560C7A7315DC37C500067E65 /* pattern1.png */; };
+		561B262F15DC390F0068B93A /* TerrainTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 561B262E15DC390F0068B93A /* TerrainTexture.m */; };
 		FF0172E515D6A74B0083131B /* boy-sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0172E415D6A74B0083131B /* boy-sprite.png */; };
 		FF04ACBF15D6CE28004B0987 /* testbg.png in Resources */ = {isa = PBXBuildFile; fileRef = FF04ACBD15D6CE28004B0987 /* testbg.png */; };
 		FF04ACC015D6CE28004B0987 /* testbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF04ACBE15D6CE28004B0987 /* testbg@2x.png */; };
@@ -46,6 +48,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		560C7A7315DC37C500067E65 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
+		561B262D15DC390F0068B93A /* TerrainTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainTexture.h; sourceTree = "<group>"; };
+		561B262E15DC390F0068B93A /* TerrainTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainTexture.m; sourceTree = "<group>"; };
 		FF0172E415D6A74B0083131B /* boy-sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boy-sprite.png"; sourceTree = "<group>"; };
 		FF04ACBD15D6CE28004B0987 /* testbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testbg.png; sourceTree = "<group>"; };
 		FF04ACBE15D6CE28004B0987 /* testbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testbg@2x.png"; sourceTree = "<group>"; };
@@ -196,6 +201,8 @@
 			children = (
 				FF06F8CD15D683F400426E40 /* Sprite.h */,
 				FF06F8CE15D683F400426E40 /* Sprite.m */,
+				561B262D15DC390F0068B93A /* TerrainTexture.h */,
+				561B262E15DC390F0068B93A /* TerrainTexture.m */,
 				FF06F8D015D683FE00426E40 /* Texture.h */,
 				FF06F8D115D683FE00426E40 /* Texture.m */,
 				FF5A0BF915D7F08500F7CD60 /* Player.h */,
@@ -225,6 +232,7 @@
 		FF5A0C0C15D7F3FB00F7CD60 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				560C7A7315DC37C500067E65 /* pattern1.png */,
 				FF5A0C0D15D7F47900F7CD60 /* fighter.png */,
 				FF5A0C0E15D7F47900F7CD60 /* gear.png */,
 				FF5A0C0F15D7F47900F7CD60 /* background.png */,
@@ -302,6 +310,7 @@
 				FF5A0C1C15D7F47900F7CD60 /* octo_8f.png in Resources */,
 				FF5A0C1D15D7F47900F7CD60 /* mine.png in Resources */,
 				FF5A0C1E15D7F47900F7CD60 /* player.png in Resources */,
+				560C7A7415DC37C500067E65 /* pattern1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +339,7 @@
 				FF5A0C2415D7FBB000F7CD60 /* Octo.m in Sources */,
 				FF5A0C2715D7FBBA00F7CD60 /* Mine.m in Sources */,
 				FF5A0C2A15D7FBC300F7CD60 /* Fighter.m in Sources */,
+				561B262F15DC390F0068B93A /* TerrainTexture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
